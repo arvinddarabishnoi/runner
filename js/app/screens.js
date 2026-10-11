@@ -17,7 +17,7 @@ const TIPS = [
   'Turbo smashes through obstacles — use it on a crowded stretch.',
   'Clipping the edge of an obstacle only makes you stumble… the beasts close in.',
   'A shield survives one hit, including a fireball.',
-  'Magnet + 2x coins is the richest combination in the game.',
+  'Magnet + Score ×2 is the richest combination in the game.',
   'The temple gets faster. So do you.',
 ];
 

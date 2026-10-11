@@ -76,7 +76,7 @@ const check = (cond, label) => {
   else { console.log(`  ✗ ${label}`); failures.push(label); }
 };
 
-console.log('\n=== Jungle Run scene integration test ===\n');
+console.log('\n=== Temple Rush scene integration test ===\n');
 console.log('building scene graph…');
 
 const scene = new THREE.Scene();
@@ -173,6 +173,25 @@ run.powers.magnet = 5; run.powers.boost = 5; run.powers.shield = true; run.power
 for (let i = 0; i < 120; i++) { autopilot(run, { skill: 1 }); run.update(dt); fx.update(dt); }
 check(run.powers.magnet > 0 && run.powers.shield, 'power-ups tick without breaking the run');
 check(run.powers.boost > 0 && run.player.material.color.getHex() !== 0xffffff, 'turbo recolours the runner');
+
+// Score ×2 power-up must double distance scoring
+{
+  run.entities.releaseAll();
+  if (run.isOver) run.revive();
+  run.player.reset();
+  run.invuln = 1e6;
+  run.state = 'playing';
+  run.powers.x2 = 0; run.powers.boost = 0;
+  const s0 = run.score;
+  run.update(1.0);
+  const base = run.score - s0;
+  const s1 = run.score;
+  run.powers.x2 = 10;
+  run.update(1.0);
+  const doubled = run.score - s1;
+  check(base > 0 && doubled > base * 1.85, 'score ×2 power-up doubles distance scoring');
+  run.powers.x2 = 0;
+}
 
 run.entities.releaseAll();
 if (run.isOver) run.revive();

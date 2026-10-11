@@ -1,5 +1,7 @@
 # dependencies & tooling
 node_modules/
+dist/
+*.zip
 .venv*/
 __pycache__/
 *.log

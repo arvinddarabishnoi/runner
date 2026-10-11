@@ -1,12 +1,15 @@
 {
-  "name": "jungle-run",
-  "version": "1.0.0",
-  "description": "Jungle Run \u2014 an endless temple-runner played in the browser: original WebGL engine, generated art pipeline and synthesized WebAudio soundtrack.",
+  "name": "temple-rush",
+  "version": "2.0.0",
+  "description": "Temple Rush: Curse of the Lost Kingdom \u2014 a 3D endless temple runner for the browser. Original WebGL engine (three.js), generated art pipeline, fully synthesized WebAudio soundtrack.",
   "main": "index.html",
   "type": "module",
   "scripts": {
+    "dev": "vite",
     "start": "node tools/serve.mjs 4173",
     "serve": "node tools/serve.mjs 4173",
+    "build": "vite build && node tools/copy_assets.mjs",
+    "preview": "vite preview",
     "test": "node tools/check_wiring.mjs && node tools/scene_test.mjs && node tools/headless_test.mjs --seeds 6 --seconds 200",
     "test:wiring": "node tools/check_wiring.mjs",
     "test:scene": "node tools/scene_test.mjs",
@@ -23,9 +26,10 @@
     "game",
     "endless-runner",
     "temple-run",
+    "temple-rush",
     "three.js",
     "webgl",
-    "canvas"
+    "vite"
   ],
   "author": "",
   "license": "MIT",
@@ -36,5 +40,8 @@
   "dependencies": {
     "three": "^0.186.1"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "vite": "^8.3.4"
+  }
 }

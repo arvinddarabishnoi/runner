@@ -1,5 +1,5 @@
 /**
- * Zero-dependency static server for Jungle Run.
+ * Zero-dependency static server for Temple Rush.
  *
  *   node tools/serve.mjs [port]
  *
@@ -66,5 +66,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(port, '0.0.0.0', () => {
-  console.log(`Jungle Run is live on http://0.0.0.0:${port}  (serving ${root})`);
+  console.log(`Temple Rush is live on http://0.0.0.0:${port}  (serving ${root})`);
 });

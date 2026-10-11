@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Asset pipeline for Jungle Run.
+"""Asset pipeline for Temple Rush.
 
 Turns the raw AI-generated source art (assets/raw/) into clean, game-ready
 sprites and textures (assets/):

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Jungle Run — UI stylesheet
+   Temple Rush — Curse of the Lost Kingdom — UI stylesheet
    Dark jungle palette + carved-gold accents. Mobile-first, safe-area aware.
    ========================================================================== */
 
@@ -62,6 +62,9 @@ html, body {
   filter: drop-shadow(0 4px 0 #4a2a08) drop-shadow(0 10px 22px rgba(0, 0, 0, .75));
 }
 .logo span:last-child { margin-left: .18em; }
+.logo-sub { margin: 6px 0 0; font-family: var(--font-display); text-transform: uppercase;
+  letter-spacing: .34em; text-indent: .34em; font-size: clamp(10px, 2.2vw, 15px); color: #ffd98a;
+  text-shadow: 0 2px 0 #3a2005, 0 6px 14px rgba(0, 0, 0, .8); text-align: center; }
 .tagline { margin: 10px 0 0; color: #e5d9b6; font-size: clamp(12px, 2.6vw, 16px); letter-spacing: .06em;
   text-shadow: 0 2px 6px rgba(0,0,0,.8); text-align: center; }
 

@@ -196,9 +196,10 @@ export class Run {
     // --- demon monkey chase behaviour
     this._updateChasers(dt);
 
-    // --- scoring
+    // --- scoring (Score ×2 power-up doubles everything earned)
     if (this.state === 'playing' || this.state === 'intro') {
-      this.score += distance * SCORE.perUnit * (this.powers.boost > 0 ? 1.4 : 1);
+      const mult = (this.powers.x2 > 0 ? 2 : 1);
+      this.score += distance * SCORE.perUnit * (this.powers.boost > 0 ? 1.4 : 1) * mult;
       if (this.comboTimer > 0) {
         this.comboTimer -= dt;
         if (this.comboTimer <= 0) { this.combo = 0; this.bus.emit('comboEnd', {}); }

@@ -1,5 +1,6 @@
 /** Persistence: coins, bests, unlocks, settings. Safe if storage is blocked. */
-const KEY = 'jungle-run-v1';
+const KEY = 'temple-rush-v1';
+const LEGACY_KEY = 'jungle-run-v1';   // previous release — migrated on load
 
 const DEFAULTS = {
   coins: 0,          // spendable wallet
@@ -25,7 +26,15 @@ let storageOk = true;
 
 export function load() {
   try {
-    const raw = localStorage.getItem(KEY);
+    let raw = localStorage.getItem(KEY);
+    if (!raw) {
+      // one-time migration from the earlier save key
+      const legacy = localStorage.getItem(LEGACY_KEY);
+      if (legacy) {
+        raw = legacy;
+        try { localStorage.setItem(KEY, legacy); localStorage.removeItem(LEGACY_KEY); } catch (e) { /* ignore */ }
+      }
+    }
     if (raw) data = { ...DEFAULTS, ...JSON.parse(raw) };
   } catch (e) {
     storageOk = false;

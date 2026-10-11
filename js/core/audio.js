@@ -51,6 +51,53 @@ export class AudioEngine {
     this.delay.connect(this.fb); this.fb.connect(this.delay);
     this.delay.connect(this.musicBus);
     this.ready = true;
+    this._startAmbience();
+  }
+
+  /**
+   * Ambient jungle bed: soft filtered wind (looped brown-ish noise with a
+   * slow LFO on the filter) plus sparse random bird chirps. Routed through
+   * the SFX bus, so it follows the sound-effects toggle. Must run after the
+   * player's first gesture (called from init()).
+   */
+  _startAmbience() {
+    const ctx = this.ctx;
+    if (!ctx || this._amb) return;
+    const len = Math.floor(ctx.sampleRate * 2.5);
+    const buf = ctx.createBuffer(1, len, ctx.sampleRate);
+    const d = buf.getChannelData(0);
+    let last = 0;
+    for (let i = 0; i < len; i++) {
+      const w = Math.random() * 2 - 1;
+      last = (last + 0.02 * w) / 1.02;
+      d[i] = last * 3.2;
+    }
+    const src = ctx.createBufferSource();
+    src.buffer = buf; src.loop = true;
+    const lp = ctx.createBiquadFilter();
+    lp.type = 'lowpass'; lp.frequency.value = 420; lp.Q.value = 0.5;
+    const g = ctx.createGain(); g.gain.value = 0.14;
+    const lfo = ctx.createOscillator(); lfo.frequency.value = 0.07;
+    const lg = ctx.createGain(); lg.gain.value = 150;
+    lfo.connect(lg); lg.connect(lp.frequency);
+    src.connect(lp); lp.connect(g); g.connect(this.sfxBus);
+    src.start(); lfo.start();
+    this._amb = { src, lfo, g };
+    this._birds = setInterval(() => {
+      if (!this.ready || !this.soundOn) return;
+      if (Math.random() < 0.55) this._chirp();
+    }, 4600);
+  }
+
+  _chirp() {
+    const f = 1900 + Math.random() * 1500;
+    const n = 2 + Math.floor(Math.random() * 3);
+    for (let i = 0; i < n; i++) {
+      this._tone({
+        type: 'sine', f0: f * (1 + i * 0.06), f1: f * 0.82,
+        dur: 0.09, gain: 0.028, at: i * 0.13,
+      });
+    }
   }
 
   resume() {

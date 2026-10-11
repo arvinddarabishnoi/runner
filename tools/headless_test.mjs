@@ -283,7 +283,7 @@ const getArg = (name, dflt) => {
 if (import.meta.url === `file://${process.argv[1]}`) {
   const seeds = getArg('--seeds', 6);
   const maxSeconds = getArg('--seconds', 300);
-  console.log(`\n=== Jungle Run headless harness (${seeds} seeds, up to ${maxSeconds}s each) ===\n`);
+  console.log(`\n=== Temple Rush headless harness (${seeds} seeds, up to ${maxSeconds}s each) ===\n`);
 
   const rows = [];
   let crashes = 0;

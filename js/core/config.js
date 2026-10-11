@@ -1,5 +1,5 @@
 /**
- * Jungle Run — global tuning constants.
+ * Temple Rush — global tuning constants.
  * Coordinate system: the player runs toward -Z, lanes are spread on X,
  * +Y is up. Everything is measured in "world units" (~1 unit ≈ 0.6 m).
  */
@@ -49,7 +49,7 @@ export const POWERUPS = {
   magnet: { time: 13, icon: 'magnet', label: 'Coin Magnet' },
   boost: { time: 7.5, icon: 'boost', label: 'Turbo' },
   shield: { time: 0, icon: 'shield', label: 'Shield' },
-  x2: { time: 15, icon: 'x2', label: 'Double Coins' },
+  x2: { time: 15, icon: 'x2', label: 'Score ×2' },
 };
 
 export const SCORE = {
