@@ -1,0 +1,10 @@
+# dependencies & tooling
+node_modules/
+.venv*/
+__pycache__/
+*.log
+
+# the raw AI-generated source art is kept in-repo (it is the source of the
+# processed assets) — nothing to ignore for assets/ itself.
+.eslintcache
+.DS_Store
